@@ -14,54 +14,27 @@ from sklearn.linear_model import LogisticRegression
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
 
-def compare():
-    folder = os.fsdecode('/Users/reganlamoureux/comparison data')
-    for file in os.listdir(folder):
-        print(file)
-        if file == '.DS_Store':
-            pass
-        else:   
-            data = pd.read_csv('/Users/reganlamoureux/comparison data'+'/'+file)
-            cols = ['contrast', 'dissimilarity', 'homogeniety', 'asm', 'energy', 'correlation', 'ent']
-            X = data[cols]
-            y = data['y']
-
-            #logit_model=sm.Logit(y,X)
-            #result=logit_model.fit()
-            #print(result.summary2())
-
-            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+def logistic_regression(csv_file): 
+        data = pd.read_csv(csv_file)
+        cols = ['contrast', 'dissimilarity', 'homogeniety', 'asm', 'energy', 'correlation', 'ent']
+        X = data[cols]
+        y = data['y']
         
-            logreg = LogisticRegression()
-            logreg.fit(X_train, y_train)
-
-            y_pred = logreg.predict(X_test)
-            print('Accuracy of logistic regression: {}'.format(logreg.score(X_test, y_test)))
-
-            from sklearn.metrics import confusion_matrix
-            confusion_matrix = confusion_matrix(y_test, y_pred)
-            print(confusion_matrix)
-
-            from sklearn.metrics import classification_report
-            print(classification_report(y_test, y_pred))
-            print('------------------------------------------')
-            
-data = pd.read_csv('eccentricity.csv')
-array = np.asanyarray(data['eccentricity'])
-X = array.reshape(-1,1)
-y = data['y']
+        logit_model=sm.Logit(y,X)
+        result=logit_model.fit()
+        print(result.summary2())
         
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
-logreg = LogisticRegression()
-logreg.fit(X_train, y_train)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+        logreg = LogisticRegression()
+        logreg.fit(X_train, y_train)
 
-y_pred = logreg.predict(X_test)
-print('Accuracy of logistic regression: {}'.format(logreg.score(X_test, y_test)))
+        y_pred = logreg.predict(X_test)
+        print('Accuracy of logistic regression: {}'.format(logreg.score(X_test, y_test)))
 
-from sklearn.metrics import confusion_matrix
-confusion_matrix = confusion_matrix(y_test, y_pred)
-print(confusion_matrix)
+        from sklearn.metrics import confusion_matrix
+        confusion_matrix = confusion_matrix(y_test, y_pred)
+        print(confusion_matrix)
 
-from sklearn.metrics import classification_report
-print(classification_report(y_test, y_pred))
-print('------------------------------------------')
+        from sklearn.metrics import classification_report
+        print(classification_report(y_test, y_pred))
+        print('------------------------------------------')
