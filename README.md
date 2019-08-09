@@ -21,3 +21,27 @@
 * Finally, perform watershed segmentation on the edge map image, using the labeled image as markers.
 ### Results:
 #### Both performed similarly, correctly segmenting about 81% of the cells. However, the library from Open CV was able to better segment the complete cell and find the true border of the cell as shown by the images below:
+#### Open CV
+<img src="https://github.com/czbiohub/malaria_cell_seg/blob/master/my_images/Malaria_5Slices_sl1_ch1_p40_t1_openCV.png" width="300" height="200" />
+
+#### Skimage
+<img src="https://github.com/czbiohub/malaria_cell_seg/blob/master/my_images/Malaria_5Slices_sl1_ch1_p40_t1_skimage.png" width="300" height="200" />
+
+## Feature Extraction
+#### Use find the co-occurance matrix of the image and extract texture features from that matrix. The angle is set equal to 0, meaning it will only consider the pixels to the left and right.
+## Classification
+#### A logistic regression classifier will determine the probability that the image is at a certain stage of the malaria infection based on the the values of the features extracted from the co-occurrence matrix. 
+#### By using images of individual cells where the stage is already known, sci-kit learn's logistic regression classifier was able to produce the following results when comparing data from one stage to another:
+
+<img src="https://github.com/czbiohub/malaria_cell_seg/blob/master/my_images/first_half_LR_data.png" width="500" height="750" />
+
+ <img src="https://github.com/czbiohub/malaria_cell_seg/blob/master/my_images/second_half_LR_data.png" width="500" height="750" />
+
+### Libraries Used:
+* matplotlib
+* sci-kit image
+* sci-kit learn
+* openCV
+* numpy
+* scipy
+* pandas

@@ -17,7 +17,6 @@ from skimage import measure
 
 
 
-counter = 1
 
 def feature_extraction(path):
     image_rgb = skimage.io.imread(path)
