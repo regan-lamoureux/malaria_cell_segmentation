@@ -86,34 +86,6 @@ def sk_image(path):
     plt.imsave('/Users/reganlamoureux/UVM-2019-05-30-15-45-12 Malaria 2x dilution/skimage/{}png'.format(path[:-3]), ws_img)
     return num_labels
 
-def excel(sheetName, imageName, ret):
-    xfile = openpyxl.load_workbook('Segmentation Results.xlsx')
-    xfile.sheetnames # all names
-    sheet = xfile[sheetName]
-    nameLine = 'A' + str(counter)
-    sheet[nameLine] = imageName
-    
-    numLine = 'B' + str(counter)
-    sheet[numLine] = ret
-    xfile.save('Segmentation Results.xlsx')
-    
-def image_to_excel(my_path):
-    global counter
-    folder = os.fsdecode(my_path)
-    #return os.listdir(folder)
-    #for image in os.listdir(folder):
-    for image in os.listdir(folder):
-        #print(str(counter) + '. ' + image)
-        if image=='.DS_Store':
-            pass
-        else:
-            ret = openCV(image)
-            excel("OpenCV", image, ret)
-            num_labels = sk_image(image)
-            excel("Skimage", image, num_labels)
-            counter += 1
-
-image_to_excel('/Users/reganlamoureux/UVM-2019-05-30-15-45-12 Malaria 2x dilution')
 
 
     
