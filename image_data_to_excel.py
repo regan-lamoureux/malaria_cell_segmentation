@@ -1,3 +1,8 @@
+import os
+import openpyxl
+
+def excel(workbook, imageName, feat_list):
+    global counter
     xfile = openpyxl.load_workbook(workbook)
     xfile.sheetnames  # all names
     sheet = xfile['Sheet1']
@@ -23,6 +28,3 @@ def image_to_excel(my_path, workbook):
             excel(workbook, os.listdir(folder)[i], ret)
             counter += 1
 
-
-
-image_to_excel('/Users/reganlamoureux/troph', 'troph_data.xlsx')
